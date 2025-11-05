@@ -33,6 +33,9 @@ env/
 .ipynb_checkpoints/
 *.ipynb_checkpoints
 */.ipynb_checkpoints/*
+.jupyter_ystore.db
+.virtual_documents/
+anaconda_projects/
 
 # Jupyter Notebook outputs (optional - uncomment to ignore all outputs)
 # *-checkpoint.ipynb
@@ -73,6 +76,7 @@ htmlcov/
 scan_results_*.json
 scan_results_export.*
 *.csv
+scan_banana_backdoor.py
 
 # OS
 .DS_Store
