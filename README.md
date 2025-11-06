@@ -29,7 +29,7 @@ This repository provides working examples and a comprehensive Jupyter notebook d
 ### Prerequisites
 
 - Python 3.12 or higher
-- Prisma AIRS Model Security account ([sign up](https://www.paloaltonetworks.com/prisma/cloud))
+- Prisma AIRS Model Security account ([request demo](https://www.paloaltonetworks.com/prisma/prisma-ai-runtime-security#demo))
 - Service account credentials (Client ID, Client Secret, TSG ID)
 
 ### Installation
@@ -284,7 +284,7 @@ For questions, issues, or feature requests:
 ## Acknowledgments
 
 - Built with [Prisma AIRS Model Security SDK](https://pypi.org/project/model-security-client/)
-- Powered by [Palo Alto Networks Prisma Cloud](https://www.paloaltonetworks.com/prisma/cloud)
+- Powered by [Palo Alto Networks Prisma AI Runtime Security](https://www.paloaltonetworks.com/prisma/prisma-ai-runtime-security)
 
 ---
 
