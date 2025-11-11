@@ -86,3 +86,4 @@ Thumbs.db
 # Uncomment if you create credential-loading scripts:
 # *_credentials.sh
 # load_env.sh
+.env

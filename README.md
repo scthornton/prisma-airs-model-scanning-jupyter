@@ -26,6 +26,10 @@ This repository provides working examples and a comprehensive Jupyter notebook d
 
 ## Quick Start
 
+> **⚠️ Important Note About Dependencies**
+>
+> The required packages (`model-security-client` and `airs-schemas`) are **proprietary Palo Alto Networks packages** not available on public PyPI. You need Prisma AIRS credentials to access them via a private package repository. See [Installation](#installation) below for automated setup.
+
 ### Prerequisites
 
 - Python 3.12 or higher
@@ -33,6 +37,31 @@ This repository provides working examples and a comprehensive Jupyter notebook d
 - Service account credentials (Client ID, Client Secret, TSG ID)
 
 ### Installation
+
+**🚀 Automated Setup (Recommended)**
+
+We provide automated scripts to handle authentication and SDK installation:
+
+```bash
+# 1. Copy credentials template
+cp .env.template .env
+
+# 2. Edit .env and add your credentials
+nano .env  # Get credentials from https://stratacloudmanager.paloaltonetworks.com
+
+# 3. Run automated setup
+./setup-sdk.sh
+```
+
+That's it! The script handles authentication with Palo Alto's private PyPI and installs all dependencies.
+
+📚 **Need help?** See [QUICK-START.md](QUICK-START.md) or [SETUP-INSTRUCTIONS.md](SETUP-INSTRUCTIONS.md) for detailed guides.
+
+---
+
+**📋 Manual Installation**
+
+If you prefer manual setup:
 
 1. **Clone the repository:**
    ```bash
@@ -46,25 +75,31 @@ This repository provides working examples and a comprehensive Jupyter notebook d
    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
    ```
 
-3. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Configure credentials:**
-
-   Set environment variables (recommended):
+3. **Set credentials as environment variables:**
    ```bash
    export MODEL_SECURITY_CLIENT_ID="AIRS@your-tsg-id.iam.panserviceaccount.com"
    export MODEL_SECURITY_CLIENT_SECRET="your-client-secret-uuid"
    export TSG_ID="your-tsg-id"
    ```
 
-   Or add to `~/.bashrc` / `~/.zshrc` for persistence.
+4. **Get PyPI authentication URL:**
+   ```bash
+   ./get-pypi-url.sh  # Returns private PyPI URL
+   ```
+
+5. **Install dependencies:**
+   ```bash
+   pip install model-security-client --extra-index-url $(./get-pypi-url.sh)
+   ```
+
+   Or if you still want to use requirements.txt (will fail without credentials):
+   ```bash
+   pip install -r requirements.txt  # ❌ Will fail - packages not on public PyPI
+   ```
 
 ### Getting Your Credentials
 
-1. **Log in to Strata Cloud Manager:** https://strata.paloaltonetworks.com
+1. **Log in to Strata Cloud Manager:** https://stratacloudmanager.paloaltonetworks.com
 2. **Create Service Account:**
    - Navigate to: **Settings → Identity & Access → Service Accounts**
    - Click **Add Service Account**
@@ -261,9 +296,23 @@ model_uri = "https://huggingface.co/openai-community/gpt2"
 # Ensure virtual environment is activated
 source .venv/bin/activate
 
-# Reinstall dependencies
-pip install -r requirements.txt
+# Use the automated setup script
+./setup-sdk.sh
+
+# OR install manually with authentication
+pip install model-security-client --extra-index-url $(./get-pypi-url.sh)
 ```
+
+### Package Installation Errors
+
+**Error:** `ERROR: Could not find a version that satisfies the requirement model-security-client`
+
+**Cause:** These packages are proprietary and hosted on Palo Alto's private PyPI, not public PyPI.
+
+**Fix:**
+1. Ensure credentials are set in `.env` or as environment variables
+2. Run `./setup-sdk.sh` for automated setup
+3. See [SETUP-INSTRUCTIONS.md](SETUP-INSTRUCTIONS.md) for detailed troubleshooting
 
 ## Contributing
 
